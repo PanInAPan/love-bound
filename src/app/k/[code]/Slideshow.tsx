@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import type { PublicView } from "@/lib/keychain-service";
-export type SlideshowData = PublicView;
+type Item = { kind: "photo" | "voice" | "video"; url: string };
+export type SlideshowData =
+  | { state: "expired"; judul: string | null }
+  | { state: "locked"; buka_pada: string; judul: string | null; untuk: string | null }
+  | { state: "open"; empty: boolean; judul: string | null; untuk: string | null; pesan: string | null; link_lagu: string | null; media: Item[] };
 
 const PHOTO_MS = 4000;
 
