@@ -12,11 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dashboard, login, dan admin didesain terang. Jangan ikut dark mode HP/laptop,
+   kalau tidak teks jadi putih di atas latar putih. Galeri /k/ mengatur warnanya sendiri. */
+:root {
+  color-scheme: light;
 }
 
 body {
