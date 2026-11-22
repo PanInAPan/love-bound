@@ -21,3 +21,6 @@ export const EXT: Record<MediaKind, string[]> = {
   voice: ["webm", "m4a", "mp3", "ogg"],
   video: ["mp4", "mov", "webm"],
 };
+
+// Maksimal keychain yang dibuat sekali klik di /admin.
+export const MAKS_PER_BATCH = 50;
