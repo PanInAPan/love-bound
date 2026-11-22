@@ -24,8 +24,6 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
     e.preventDefault();
     setMsg(null);
     // Terima link lengkap (…/edit/KODE?t=TOKEN) atau "KODE TOKEN".
-    const raw = code.trim();
-    let id = ""
     // const m = raw.match(/\/(?:edit|k)\/([^/?#\s]+)\?(?:.*&)?t=([0-9a-f-]{36})/i);
     // if (m) { id = decodeURIComponent(m[1]); token = m[2]; }
     // else [id, token = ""] = raw.split(/\s+/);
