@@ -44,7 +44,7 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
 
   return (
     <main className="min-h-dvh bg-rose-50">
-      <header className="bg-white border-b">
+      <header className="bg-white/80">
         <div className="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
           <h1 className="font-semibold text-rose-900">Keychain Kenangan</h1>
           <div className="flex items-center gap-3 text-sm">
@@ -59,7 +59,7 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
           <h2 className="font-medium">Tambah keychain</h2>
           <form onSubmit={claim} className="flex gap-2">
             <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Tempel link dari kartu petunjuk"
-              className="flex-1 rounded-lg border px-3 py-2" />
+              className="flex-1 rounded-lg px-3 py-2 bg-rose-50/60 outline-none focus:ring-2 focus:ring-rose-200 placeholder:text-neutral-400" />
             <button className="rounded-lg bg-rose-600 px-4 py-2 text-white disabled:opacity-50" disabled={!code.trim()}>Tambah</button>
           </form>
           {msg && <p className="text-sm text-red-600">{msg}</p>}
@@ -67,7 +67,7 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
             <div className="flex flex-wrap gap-2 pt-1">
               {keychains.map((k) => (
                 <button key={k.id} onClick={() => setSelectedId(k.id)}
-                  className={`rounded-full px-3 py-1 text-sm border ${k.id === selectedId ? "bg-rose-600 text-white border-rose-600" : "bg-white"}`}>
+                  className={`rounded-full px-3 py-1 text-sm ${k.id === selectedId ? "bg-rose-600 text-white" : "bg-rose-50 text-rose-800 hover:bg-rose-100"}`}>
                   {k.judul || k.id}
                 </button>
               ))}
@@ -168,7 +168,7 @@ function Editor({ keychain, onSaved }: { keychain: Keychain; onSaved: (k: Keycha
     setNotice({ ok: true, text: "Tersimpan! Tempelkan keychain ke HP untuk melihat slideshow." });
   }
 
-  const input = "w-full rounded-lg border px-3 py-2 disabled:bg-neutral-100";
+  const input = "w-full rounded-lg px-3 py-2 bg-rose-50/60 outline-none focus:ring-2 focus:ring-rose-200 placeholder:text-neutral-400 disabled:opacity-60";
 
   return (
     <div className="space-y-6">
@@ -230,7 +230,7 @@ function Editor({ keychain, onSaved }: { keychain: Keychain; onSaved: (k: Keycha
 
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {media.map((m) => (
-            <li key={m.path} className="rounded-xl border overflow-hidden bg-neutral-50">
+            <li key={m.path} className="rounded-xl overflow-hidden bg-rose-50/60">
               {m.kind === "photo" && <img src={m.url} alt="" className="aspect-square w-full object-cover" />}
               {m.kind === "video" && <video src={m.url} className="aspect-square w-full object-cover" controls />}
               {m.kind === "voice" && (
@@ -267,7 +267,7 @@ function PickButton({ label, accept, multiple, disabled, onPick }: {
   return (
     <>
       <button type="button" disabled={disabled} onClick={() => ref.current?.click()}
-        className="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 disabled:opacity-40">{label}</button>
+        className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-800 hover:bg-rose-100 disabled:opacity-40">{label}</button>
       <input ref={ref} type="file" hidden accept={accept} multiple={multiple}
         onChange={(e) => { onPick(e.target.files); e.target.value = ""; }} />
     </>
@@ -305,7 +305,7 @@ function VoiceRecorder({ label, disabled, onDone }: { label: string; disabled?: 
     </button>
   ) : (
     <button type="button" disabled={disabled} onClick={start}
-      className="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 disabled:opacity-40">🎙️ {label}</button>
+      className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-800 hover:bg-rose-100 disabled:opacity-40">🎙️ {label}</button>
   );
 }
 
