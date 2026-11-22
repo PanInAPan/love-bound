@@ -53,7 +53,7 @@ export default function AdminPanel({ email, base, awal, galatAwal }: {
     <main className="min-h-dvh bg-rose-50">
       <header className="bg-white border-b border-neutral-200">
         <div className="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
-          <h1 className="font-semibold text-rose-900">Admin keychain</h1>
+          <h1 className="font-semibold text-rose-900">Admin LoveBound</h1>
           <span className="text-sm text-neutral-500 hidden sm:inline">{email}</span>
         </div>
       </header>

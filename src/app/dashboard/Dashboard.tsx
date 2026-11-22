@@ -25,11 +25,11 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
     setMsg(null);
     // Terima link lengkap (…/edit/KODE?t=TOKEN) atau "KODE TOKEN".
     const raw = code.trim();
-    let id = "", token = "";
-    const m = raw.match(/\/(?:edit|k)\/([^/?#\s]+)\?(?:.*&)?t=([0-9a-f-]{36})/i);
-    if (m) { id = decodeURIComponent(m[1]); token = m[2]; }
-    else [id, token = ""] = raw.split(/\s+/);
-    const res = await claimKeychain(id, token);
+    let id = ""
+    // const m = raw.match(/\/(?:edit|k)\/([^/?#\s]+)\?(?:.*&)?t=([0-9a-f-]{36})/i);
+    // if (m) { id = decodeURIComponent(m[1]); token = m[2]; }
+    // else [id, token = ""] = raw.split(/\s+/);
+    const res = await claimKeychain(code);
     if (!res.ok) return setMsg(res.error);
     const k = res.data;
     setKeychains((list) => (list.some((x) => x.id === k.id) ? list : [...list, k]));
@@ -46,7 +46,7 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
     <main className="min-h-dvh bg-rose-50">
       <header className="bg-white/80">
         <div className="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
-          <h1 className="font-semibold text-rose-900">Keychain Kenangan</h1>
+          <h1 className="font-semibold text-rose-900">LoveBound</h1>
           <div className="flex items-center gap-3 text-sm">
             <span className="text-neutral-500 hidden sm:inline">{email}</span>
             <button onClick={signOut} className="text-rose-700 hover:underline">Keluar</button>
@@ -58,7 +58,7 @@ export default function Dashboard({ email, initialKeychains, initialSelected, cl
         <section className="rounded-2xl bg-white p-5 shadow-sm space-y-3">
           <h2 className="font-medium">Tambah keychain</h2>
           <form onSubmit={claim} className="flex gap-2">
-            <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Tempel link dari kartu petunjuk"
+            <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Masukkan kode keychain baru dari admin"
               className="flex-1 rounded-lg px-3 py-2 bg-rose-50/60 outline-none focus:ring-2 focus:ring-rose-200 placeholder:text-neutral-400" />
             <button className="rounded-lg bg-rose-600 px-4 py-2 text-white disabled:opacity-50" disabled={!code.trim()}>Tambah</button>
           </form>

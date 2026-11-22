@@ -27,19 +27,18 @@ async function wrap<T>(fn: () => Promise<T>): Promise<Result<T>> {
   try { return { ok: true, data: await fn() }; } catch (e) { return fail((e as Error).message); }
 }
 
-// Klaim keychain pakai kode + edit_token (dari link /edit/<kode>?t=<token> di kartu petunjuk).
-export async function claimKeychain(id: string, token: string) {
+export async function claimKeychain(card_id: string) {
   return wrap(async () => {
     const user = await requireUser();
     const admin = createAdminClient();
-    const { data: k } = await admin.from("keychains").select("id, edit_token, owner_id").eq("id", id).maybeSingle();
-    if (!k || k.edit_token !== token) throw new Error("Kode atau token tidak cocok");
+    const { data: k } = await admin.from("keychains").select("id, edit_token, owner_id").eq("id", card_id).maybeSingle();
+    if (!k || k.id !== card_id) throw new Error("Kode tidak cocok");
     if (k.owner_id && k.owner_id !== user.id) throw new Error("Keychain ini sudah dipakai akun Google lain");
     if (!k.owner_id) {
-      const { error } = await admin.from("keychains").update({ owner_id: user.id }).eq("id", id).is("owner_id", null);
+      const { error } = await admin.from("keychains").update({ owner_id: user.id }).eq("id", card_id).is("owner_id", null);
       if (error) throw new Error(error.message);
     }
-    return getOwned(id);
+    return getOwned(card_id);
   });
 }
 
